@@ -1,0 +1,477 @@
+/* =========================================
+   1. GLOBAL & VARIABEL TEMA (AESTHETIC)
+   ========================================= */
+:root {
+  --bg-primary: #fff0f5;
+  --bg-secondary: #ffffff;
+  --text-main: #4a3b4c;
+  --text-subtitle: #7a687c;
+  --accent-color: #ff69b4;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --border-color: #ffd1dc;
+}
+
+body[data-theme="home"] {
+  --bg-primary: #fff0f5;
+  --accent-color: #ff69b4;
+}
+
+body[data-theme="about"] {
+  --bg-primary: #f0f8ff;
+  --accent-color: #6495ed;
+}
+
+body[data-theme="films"] {
+  --bg-primary: #fffaf0;
+  --accent-color: #ff8c00;
+}
+
+body[data-theme="journey"] {
+  --bg-primary: #f0fff0;
+  --accent-color: #2e8b57;
+}
+
+body[data-theme="bucketlist"] {
+  --bg-primary: #fdf5e6;
+  --accent-color: #db7093;
+}
+
+body[data-theme="contact"] {
+  --bg-primary: #faf0e6;
+  --accent-color: #cd5c5c;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  overflow-x: hidden;
+  transition: background-color 0.6s ease;
+  margin: 0;
+  padding-top: 70px;
+}
+
+/* =========================================
+   2. BACKGROUND EMOJI MELAYANG
+   ========================================= */
+.floating-emojis {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.floating-emojis span {
+  position: absolute;
+  display: block;
+  font-size: 24px;
+  animation: floatEmoji 15s linear infinite;
+  opacity: 0.4;
+}
+
+.floating-emojis span:nth-child(1) { left: 10%; animation-duration: 12s; }
+.floating-emojis span:nth-child(2) { left: 25%; animation-duration: 18s; animation-delay: 2s; }
+.floating-emojis span:nth-child(3) { left: 40%; animation-duration: 14s; animation-delay: 4s; }
+.floating-emojis span:nth-child(4) { left: 55%; animation-duration: 20s; animation-delay: 1s; }
+.floating-emojis span:nth-child(5) { left: 70%; animation-duration: 16s; animation-delay: 3s; }
+.floating-emojis span:nth-child(6) { left: 85%; animation-duration: 13s; animation-delay: 5s; }
+.floating-emojis span:nth-child(7) { left: 15%; animation-duration: 19s; animation-delay: 6s; }
+.floating-emojis span:nth-child(8) { left: 90%; animation-duration: 15s; animation-delay: 2s; }
+
+@keyframes floatEmoji {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  20% { opacity: 0.5; }
+  80% { opacity: 0.5; }
+  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
+/* =========================================
+   3. NAVBAR STYLING
+   ========================================= */
+.navbar {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: var(--text-main) !important;
+}
+
+.navbar-nav .nav-link {
+  color: var(--text-subtitle) !important;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: var(--accent-color) !important;
+  font-weight: 700;
+}
+
+/* =========================================
+   4. SECTION & CARD STYLING
+   ========================================= */
+section {
+  padding: 80px 0;
+}
+
+.jumbotron {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+}
+
+.section-title {
+  font-weight: 800;
+  color: var(--text-main);
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  width: 50%;
+  height: 4px;
+  background-color: var(--accent-color);
+  bottom: -10px;
+  left: 25%;
+  border-radius: 2px;
+}
+
+.subtitle-text { color: var(--text-subtitle); }
+.text-dark-custom { color: var(--text-main); }
+.text-secondary-custom { color: var(--text-subtitle); }
+.text-accent-pink { color: var(--accent-color); }
+.bg-pink-custom { background-color: var(--accent-color) !important; color: #fff !important; }
+
+.aesthetic-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.aesthetic-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================
+   5. HERO & ABOUT COMPONENTS
+   ========================================= */
+.profile-img-hero, .about-profile-img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border: 5px solid #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.about-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.about-icon-box {
+  width: 45px;
+  height: 45px;
+  background-color: var(--bg-primary);
+  color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 20px;
+}
+
+/* =========================================
+   6. FILMS, JOURNEY & BUCKET LIST
+   ========================================= */
+.book-img-wrapper, .bucket-img-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  height: 220px;
+}
+
+.book-img, .bucket-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.aesthetic-card:hover .book-img,
+.bucket-card:hover .bucket-img {
+  transform: scale(1.05);
+}
+
+.bucket-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.bucket-card:hover { transform: translateY(-5px); }
+.badge-dream { font-size: 0.85rem; font-weight: 600; color: var(--accent-color); }
+
+/* --- POLAROID JOURNEY STYLING --- */
+.polaroid-grid-container {
+  position: relative;
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.journey-center-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 270px;
+  height: 270px;
+  padding: 25px 20px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 3px solid var(--border-color);
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.journey-center-badge h6 {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.journey-desc-text {
+  font-size: 0.7rem !important;
+  line-height: 1.35;
+}
+
+.polaroid-card {
+  background: #ffffff;
+  padding: 14px 14px 38px 14px;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  width: 260px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.polaroid-card img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.polaroid-caption {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main);
+  text-align: center;
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+
+.polaroid-tilt-1 { transform: rotate(-7deg); }
+.polaroid-tilt-2 { transform: rotate(6deg); }
+.polaroid-tilt-3 { transform: rotate(5deg); }
+.polaroid-tilt-4 { transform: rotate(-6deg); }
+
+.polaroid-card:hover {
+  transform: scale(1.05) rotate(0deg) !important;
+  z-index: 11;
+  box-shadow: 0 18px 35px rgba(0,0,0,0.18);
+}
+
+@media (max-width: 991.98px) {
+  .journey-center-badge {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 90%;
+    max-width: 340px;
+    height: auto;
+    border-radius: 20px;
+    margin: 0 auto 30px auto;
+    padding: 30px;
+  }
+  .journey-desc-text {
+    font-size: 0.78rem !important;
+  }
+}
+
+/* =========================================
+   7. BUTTONS & FORMS
+   ========================================= */
+.btn-pink-gradient {
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: 50rem;
+  padding: 10px 25px;
+  font-weight: 600;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn-pink-gradient:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.btn-outline-custom {
+  background: transparent;
+  color: var(--text-main);
+  border: 2px solid var(--accent-color);
+  border-radius: 50rem;
+  padding: 10px 25px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-custom:hover {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+.form-control {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.form-control:focus {
+  background: #fff;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 0.2rem rgba(255, 105, 180, 0.15);
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  background-color: var(--bg-primary);
+  color: var(--accent-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 18px;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px);
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+/* =========================================
+   8. ANIMASI (HOME FADE-IN, SCROLL REVEAL & KLIK)
+   ========================================= */
+@keyframes fadeInHome {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.initial-fade-in {
+  animation: fadeInHome 1.2s ease-out forwards;
+}
+
+.reveal-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal-section.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes clickEffect {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+.click-animation {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 105, 180, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: clickEffect 0.4s ease-out forwards;
+  z-index: 9999;
+}
+
+.pencil-cursor::after {
+  content: '|';
+  display: inline-block;
+  animation: blinkCursor 0.7s infinite;
+  color: var(--accent-color);
+  font-weight: bold;
+  margin-left: 2px;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* =========================================
+   9. LOGIN OVERLAY STYLING
+   ========================================= */
+.login-overlay-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 240, 245, 0.95);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  padding: 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
