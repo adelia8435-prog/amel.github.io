@@ -1,477 +1,142 @@
-/* =========================================
-   1. GLOBAL & VARIABEL TEMA (AESTHETIC)
-   ========================================= */
-:root {
-  --bg-primary: #fff0f5;
-  --bg-secondary: #ffffff;
-  --text-main: #4a3b4c;
-  --text-subtitle: #7a687c;
-  --accent-color: #ff69b4;
-  --card-bg: rgba(255, 255, 255, 0.85);
-  --border-color: #ffd1dc;
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Allura&display=swap');
+:root{--bg:#f6eeea;--paper:#fffaf7;--pink:#b76f7c;--pink2:#d99aa4;--ink:#29201f;--muted:#6e5b59;--line:#d8bfc0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif}a{text-decoration:none;color:inherit}img{display:block;width:100%;height:100%;object-fit:cover}button{font:inherit}.hidden{display:none!important}
+.topbar{position:sticky;top:0;z-index:50;height:76px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(255,250,247,.97);border-bottom:1px solid #ead9d6}
+.logo{font-family:'Cormorant Garamond',serif;font-size:21px;line-height:.9;letter-spacing:2px}.logo span{font-weight:700}.logo small{display:block;font:8px 'DM Sans';letter-spacing:3px;margin-top:6px}.topbar nav{display:flex;gap:25px;font-size:12px}.topbar nav a{padding:28px 0;border-bottom:2px solid transparent}.topbar nav a:hover{color:var(--pink);border-bottom-color:var(--pink)}.nav-btn{display:none;border:0;background:none;font-size:23px}
+.section{min-height:100vh;padding:90px 7%;position:relative;overflow:hidden}.eyebrow{font-size:11px;letter-spacing:4px;color:#9a6b72;margin-bottom:12px}.section h2{font:600 clamp(48px,6vw,78px)/.95 'Cormorant Garamond',serif;margin:0}.script{font:34px Allura,cursive;color:#9b606a}
+.intro{height:100vh;position:fixed;inset:0;z-index:100;background:#f3e8e4;overflow:hidden}.intro:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,transparent 0 22%,rgba(115,75,73,.06) 70%);pointer-events:none}.intro-photo{position:absolute;left:-50px;top:-80px;width:390px;height:300px;opacity:.75;transform:rotate(-8deg)}.intro-center{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);text-align:center;width:min(720px,90vw);z-index:2}.flower{font-size:28px;color:#8f5e64}.intro h1{font:500 clamp(45px,6vw,78px) 'Cormorant Garamond';letter-spacing:5px;margin:12px 0}.intro .script{font-size:38px}.intro-center p{letter-spacing:5px;color:#765c5e;font-size:11px}.intro-loader{height:7px;border:1px solid #bd969c;margin:42px auto 17px;max-width:360px}.intro-loader span{display:block;height:100%;width:0;background:#b97984}.intro-center small{letter-spacing:4px;color:#8b6a6d;line-height:1.8}.intro-note{position:absolute;right:8%;top:15%;font:27px Allura;color:#765456;transform:rotate(-4deg)}.intro-est{position:absolute;bottom:8%;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:4px;color:#876e6e}
+.home{display:grid;grid-template-columns:48% 52%;align-items:center;background:linear-gradient(90deg,#faf4f1,#f4e8e5)}.home-copy{padding-right:8%}.home h2{font-size:clamp(60px,6.5vw,92px)}.home h2 em{font-style:normal;color:#a65e6c}.home h3{font-size:17px;font-weight:500;color:#594b4a}.home-copy>p{max-width:620px;font-size:16px;line-height:1.7;color:var(--muted)}.actions{display:flex;gap:16px;margin:28px 0}.pill{display:inline-block;padding:14px 27px;border:1px solid var(--pink);border-radius:30px;color:#9b5e68;transition:.3s}.pill.primary{background:#bc7480;color:white}.pill:hover{transform:translateY(-3px)}.stats{display:flex;gap:0;margin-top:28px}.stats div{padding:0 25px;border-right:1px solid #d6c0c0}.stats div:first-child{padding-left:0}.stats b{display:block;font:700 26px 'Cormorant Garamond'}.stats span{font-size:11px;color:#756667}.home blockquote{font:italic 21px 'Cormorant Garamond';color:#746263;margin:48px 0 0}.home-collage{height:690px;position:relative}.polaroid{background:#fff;padding:14px 14px 45px;border:1px solid #e5d9d6;position:absolute}.polaroid img{width:100%;height:100%;object-fit:cover}.polaroid span{position:absolute;bottom:12px;left:0;right:0;text-align:center;font:24px Allura;color:#4e3c3d}.hero-polaroid{width:470px;height:560px;right:9%;top:7%;transform:rotate(2deg)}.tape-note,.paper-note{position:absolute;background:#f8ece8;padding:20px;font:24px Allura;color:#594547}.tape-note{left:0;top:34%;transform:rotate(-6deg)}.small-polaroid{position:absolute;background:#fff;padding:9px 9px 35px;width:190px;height:220px;right:-2%;bottom:2%;transform:rotate(8deg)}.small-polaroid span{position:absolute;bottom:6px;left:0;right:0;text-align:center;font:18px Allura}
+.about{display:grid;grid-template-columns:43% 57%;background:#f7efec}.about-collage{position:relative;min-height:650px}.about-polaroid{width:390px;height:470px;left:7%;top:11%;transform:rotate(-4deg)}.mini-photo{position:absolute;width:190px;height:230px;right:8%;bottom:10%;padding:9px;background:#fff;transform:rotate(8deg)}.paper-note{left:0;top:14%;transform:rotate(-5deg)}.about-copy{padding-left:4%;max-width:780px}.about-copy h2{margin-bottom:8px}.about-card{background:#f1e2df;padding:25px 30px;margin:20px 0;border-left:2px solid var(--pink)}.about-card h3{font:600 24px 'Cormorant Garamond';margin:0 0 10px}.about-card p{font-size:14px;line-height:1.7;color:#625454}.trait-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.trait-grid div{background:#fff9f6;padding:20px 10px;text-align:center;border:1px solid #eee1df}.trait-grid b{display:block;font-size:24px;color:#a65d6a}.trait-grid strong{display:block;font:600 16px 'Cormorant Garamond';margin:8px 0}.trait-grid span{font-size:10px;color:#776667}.quote-strip{margin-top:18px;background:#ead1d2;padding:15px;text-align:center;color:#9b626b;font:italic 21px 'Cormorant Garamond'}
+
+/* --- MY JOURNEY SECTION (RAPI, PRESISI, DENGAN MOTIF & EMOJI) --- */
+.journey{
+  background: #f7f3ef;
+  padding: 80px 20px 100px;
+  position: relative;
+}
+.section-head{
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto 50px;
+}
+.section-head h2{
+  margin-bottom: 12px;
+}
+.section-head p{
+  color: #6b5c5b;
 }
 
-body[data-theme="home"] {
-  --bg-primary: #fff0f5;
-  --accent-color: #ff69b4;
-}
-
-body[data-theme="about"] {
-  --bg-primary: #f0f8ff;
-  --accent-color: #6495ed;
-}
-
-body[data-theme="films"] {
-  --bg-primary: #fffaf0;
-  --accent-color: #ff8c00;
-}
-
-body[data-theme="journey"] {
-  --bg-primary: #f0fff0;
-  --accent-color: #2e8b57;
-}
-
-body[data-theme="bucketlist"] {
-  --bg-primary: #fdf5e6;
-  --accent-color: #db7093;
-}
-
-body[data-theme="contact"] {
-  --bg-primary: #faf0e6;
-  --accent-color: #cd5c5c;
-}
-
-body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: var(--bg-primary);
-  color: var(--text-main);
-  overflow-x: hidden;
-  transition: background-color 0.6s ease;
-  margin: 0;
-  padding-top: 70px;
-}
-
-/* =========================================
-   2. BACKGROUND EMOJI MELAYANG
-   ========================================= */
-.floating-emojis {
-  position: fixed;
-  top: 0;
-  left: 0;
+.journey-grid{
+  position: relative;
   width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-  overflow: hidden;
-}
-
-.floating-emojis span {
-  position: absolute;
-  display: block;
-  font-size: 24px;
-  animation: floatEmoji 15s linear infinite;
-  opacity: 0.4;
-}
-
-.floating-emojis span:nth-child(1) { left: 10%; animation-duration: 12s; }
-.floating-emojis span:nth-child(2) { left: 25%; animation-duration: 18s; animation-delay: 2s; }
-.floating-emojis span:nth-child(3) { left: 40%; animation-duration: 14s; animation-delay: 4s; }
-.floating-emojis span:nth-child(4) { left: 55%; animation-duration: 20s; animation-delay: 1s; }
-.floating-emojis span:nth-child(5) { left: 70%; animation-duration: 16s; animation-delay: 3s; }
-.floating-emojis span:nth-child(6) { left: 85%; animation-duration: 13s; animation-delay: 5s; }
-.floating-emojis span:nth-child(7) { left: 15%; animation-duration: 19s; animation-delay: 6s; }
-.floating-emojis span:nth-child(8) { left: 90%; animation-duration: 15s; animation-delay: 2s; }
-
-@keyframes floatEmoji {
-  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-  20% { opacity: 0.5; }
-  80% { opacity: 0.5; }
-  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-}
-
-/* =========================================
-   3. NAVBAR STYLING
-   ========================================= */
-.navbar {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-}
-
-.navbar-brand {
-  font-weight: 700;
-  color: var(--text-main) !important;
-}
-
-.navbar-nav .nav-link {
-  color: var(--text-subtitle) !important;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-  color: var(--accent-color) !important;
-  font-weight: 700;
-}
-
-/* =========================================
-   4. SECTION & CARD STYLING
-   ========================================= */
-section {
-  padding: 80px 0;
-}
-
-.jumbotron {
-  min-height: 90vh;
-  display: flex;
-  align-items: center;
-}
-
-.section-title {
-  font-weight: 800;
-  color: var(--text-main);
-  position: relative;
-}
-
-.section-title::after {
-  content: '';
-  position: absolute;
-  width: 50%;
-  height: 4px;
-  background-color: var(--accent-color);
-  bottom: -10px;
-  left: 25%;
-  border-radius: 2px;
-}
-
-.subtitle-text { color: var(--text-subtitle); }
-.text-dark-custom { color: var(--text-main); }
-.text-secondary-custom { color: var(--text-subtitle); }
-.text-accent-pink { color: var(--accent-color); }
-.bg-pink-custom { background-color: var(--accent-color) !important; color: #fff !important; }
-
-.aesthetic-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.aesthetic-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-}
-
-/* =========================================
-   5. HERO & ABOUT COMPONENTS
-   ========================================= */
-.profile-img-hero, .about-profile-img {
-  width: 250px;
-  height: 250px;
-  object-fit: cover;
-  border: 5px solid #fff;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-.about-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-}
-
-.about-icon-box {
-  width: 45px;
-  height: 45px;
-  background-color: var(--bg-primary);
-  color: var(--accent-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-size: 20px;
-}
-
-/* =========================================
-   6. FILMS, JOURNEY & BUCKET LIST
-   ========================================= */
-.book-img-wrapper, .bucket-img-wrapper {
-  position: relative;
-  overflow: hidden;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  height: 220px;
-}
-
-.book-img, .bucket-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.aesthetic-card:hover .book-img,
-.bucket-card:hover .bucket-img {
-  transform: scale(1.05);
-}
-
-.bucket-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  overflow: hidden;
-  transition: transform 0.3s ease;
-}
-
-.bucket-card:hover { transform: translateY(-5px); }
-.badge-dream { font-size: 0.85rem; font-weight: 600; color: var(--accent-color); }
-
-/* --- POLAROID JOURNEY STYLING --- */
-.polaroid-grid-container {
-  position: relative;
-  max-width: 950px;
+  max-width: 1150px;
+  height: 620px;
   margin: 0 auto;
 }
 
-.journey-center-badge {
+.journey-story{
   position: absolute;
-  top: 50%;
   left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
-  width: 270px;
-  height: 270px;
-  padding: 25px 20px;
-  background: rgba(255, 255, 255, 0.96);
-  border: 3px solid var(--border-color);
+  width: 380px;
+  height: 380px;
   border-radius: 50%;
-  text-align: center;
+  background: #fffaf7;
+  border: 1px dashed #dcd6cd;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 10;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-}
-
-.journey-center-badge h6 {
-  font-size: 0.95rem;
-  font-weight: 700;
-}
-
-.journey-desc-text {
-  font-size: 0.7rem !important;
-  line-height: 1.35;
-}
-
-.polaroid-card {
-  background: #ffffff;
-  padding: 14px 14px 38px 14px;
-  border-radius: 8px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
-  width: 260px;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.polaroid-card img {
-  width: 100%;
-  height: 210px;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-.polaroid-caption {
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--text-main);
   text-align: center;
-  margin-top: 12px;
-  margin-bottom: 0;
+  padding: 50px;
+  z-index: 10;
+}
+.journey-story span{
+  font-size: 24px;
+  color: var(--pink);
+  margin-bottom: 4px;
+}
+.journey-story h3{
+  font: 600 23px 'Cormorant Garamond', serif;
+  margin: 4px 0 8px;
+}
+.journey-story p{
+  font-size: 13px;
+  line-height: 1.6;
+  color: #695b5a;
+  margin: 0;
 }
 
-.polaroid-tilt-1 { transform: rotate(-7deg); }
-.polaroid-tilt-2 { transform: rotate(6deg); }
-.polaroid-tilt-3 { transform: rotate(5deg); }
-.polaroid-tilt-4 { transform: rotate(-6deg); }
-
-.polaroid-card:hover {
-  transform: scale(1.05) rotate(0deg) !important;
-  z-index: 11;
-  box-shadow: 0 18px 35px rgba(0,0,0,0.18);
-}
-
-@media (max-width: 991.98px) {
-  .journey-center-badge {
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
-    width: 90%;
-    max-width: 340px;
-    height: auto;
-    border-radius: 20px;
-    margin: 0 auto 30px auto;
-    padding: 30px;
-  }
-  .journey-desc-text {
-    font-size: 0.78rem !important;
-  }
-}
-
-/* =========================================
-   7. BUTTONS & FORMS
-   ========================================= */
-.btn-pink-gradient {
-  background-color: var(--accent-color);
-  color: #fff;
-  border: none;
-  border-radius: 50rem;
-  padding: 10px 25px;
-  font-weight: 600;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.btn-pink-gradient:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
-  color: #fff;
-}
-
-.btn-outline-custom {
-  background: transparent;
-  color: var(--text-main);
-  border: 2px solid var(--accent-color);
-  border-radius: 50rem;
-  padding: 10px 25px;
-  font-weight: 600;
-  transition: all 0.2s ease;
-}
-
-.btn-outline-custom:hover {
-  background-color: var(--accent-color);
-  color: #fff;
-}
-
-.form-control {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 12px;
-}
-
-.form-control:focus {
-  background: #fff;
-  border-color: var(--accent-color);
-  box-shadow: 0 0 0 0.2rem rgba(255, 105, 180, 0.15);
-}
-
-.social-icon {
-  width: 40px;
-  height: 40px;
-  background-color: var(--bg-primary);
-  color: var(--accent-color);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-size: 18px;
-  text-decoration: none;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.social-icon:hover {
-  transform: translateY(-3px);
-  background-color: var(--accent-color);
-  color: #fff;
-}
-
-/* =========================================
-   8. ANIMASI (HOME FADE-IN, SCROLL REVEAL & KLIK)
-   ========================================= */
-@keyframes fadeInHome {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.initial-fade-in {
-  animation: fadeInHome 1.2s ease-out forwards;
-}
-
-.reveal-section {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.reveal-section.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@keyframes clickEffect {
-  0% { transform: scale(0); opacity: 1; }
-  100% { transform: scale(4); opacity: 0; }
-}
-
-.click-animation {
+.jcard{
   position: absolute;
-  width: 20px;
-  height: 20px;
-  background: rgba(255, 105, 180, 0.6);
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  animation: clickEffect 0.4s ease-out forwards;
-  z-index: 9999;
+  background: #fff;
+  padding: 10px 10px 38px;
+  border: 1px solid #e5d9d6;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  z-index: 5;
 }
-
-.pencil-cursor::after {
-  content: '|';
-  display: inline-block;
-  animation: blinkCursor 0.7s infinite;
-  color: var(--accent-color);
-  font-weight: bold;
-  margin-left: 2px;
-}
-
-@keyframes blinkCursor {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* =========================================
-   9. LOGIN OVERLAY STYLING
-   ========================================= */
-.login-overlay-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(255, 240, 245, 0.95);
-  backdrop-filter: blur(12px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 99999;
-  padding: 20px;
-}
-
-.login-card {
+.jcard img{
   width: 100%;
-  max-width: 420px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid var(--border-color);
-  border-radius: 24px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  height: 200px;
+  object-fit: cover;
 }
+.jcard span{
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font: 20px Allura, cursive;
+  color: #4e3c3d;
+}
+
+.jcard::before {
+  position: absolute;
+  top: -14px;
+  right: -10px;
+  font-size: 20px;
+  z-index: 6;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+.jcard::after {
+  position: absolute;
+  bottom: -12px;
+  left: -8px;
+  font-size: 18px;
+  z-index: 6;
+}
+
+.j1 { width: 270px; left: 2%; top: 2%; transform: rotate(-6deg); }
+.j1::before { content: "🌿"; }
+.j1::after { content: "✨"; }
+
+.j2 { width: 280px; right: 2%; top: 5%; transform: rotate(5deg); }
+.j2::before { content: "🤍"; }
+.j2::after { content: "🏔️"; }
+
+.j3 { width: 265px; left: 8%; bottom: 2%; transform: rotate(6deg); }
+.j3::before { content: "🌷"; }
+.j3::after { content: "⭐"; }
+
+.j4 { width: 275px; right: 6%; bottom: 3%; transform: rotate(-5deg); }
+.j4::before { content: "⛰️"; }
+.j4::after { content: "💖"; }
+
+.films{background:#f8efec}.film-head{display:grid;grid-template-columns:1fr 320px;text-align:left;align-items:center}.film-head blockquote{font:italic 26px 'Cormorant Garamond';border-left:1px solid #b58c90;padding-left:45px}.film-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px;max-width:1300px;margin:auto}.film-card{background:#fffaf7;border:1px solid #eadeda;padding:10px 10px 20px}.film-image{height:250px;position:relative;overflow:hidden}.film-image .tag{position:absolute;right:10px;top:10px;background:#b87580;color:#fff;border-radius:20px;padding:6px 12px;font-size:11px}.film-image button{position:absolute;left:12px;bottom:12px;width:45px;height:45px;border-radius:50%;background:#fff;border:1px solid #ddd;color:#9b5f69}.film-card h3{font:700 27px 'Cormorant Garamond';margin:14px 5px 2px}.film-card small,.film-card p{margin:0 5px;color:#6d5c5c}.film-card p{font-size:13px;line-height:1.6;margin-top:10px}.rating{color:#d99b39;margin:13px 5px}.rating b{color:#625757;font-weight:400;margin-left:5px}.watch{display:block;text-align:center;background:#bc7480;color:white;border-radius:25px;padding:11px;margin:12px 4px 0}
+.places{background:#f7f1ed}.places-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;max-width:1300px;margin:auto}.place-card{position:relative;background:#fffaf7;border:1px solid #e4d8d4;padding:12px 12px 18px}.place-card img{height:300px}.place-card h3{font:600 27px 'Cormorant Garamond';margin:14px 7px 5px}.place-card p{font-size:13px;line-height:1.6;color:#6b5c5b;margin:0 7px 18px}.place-card a{display:block;border:1px solid #d7aeb1;border-radius:25px;padding:10px 15px;color:#a0616a;font-size:12px;margin:0 7px}.stamp{position:absolute;z-index:2;left:24px;top:23px;background:#f4e9df;padding:12px 14px;border:1px solid #d9c5bb;font:11px Georgia;letter-spacing:2px;transform:rotate(-5deg)}.stamp.green{background:#e5ece1}
+.contact{min-height:65vh;background:#3d2c2b;color:#f7ebe8;display:grid;grid-template-columns:1fr 1fr;align-items:center}.contact .eyebrow{color:#d5a7ad}.contact h2{font-size:75px}.contact p{max-width:550px;color:#e4cecc;line-height:1.7}.contact-links{display:flex;gap:15px;margin-top:25px}.contact-links a{border:1px solid #d6aab0;padding:12px 20px;border-radius:25px}.contact-note{justify-self:end;font:50px Allura;color:#dfb6bc;transform:rotate(-5deg)}.contact-note span{font-size:25px}.footer{text-align:center;padding:20px;background:#291c1b;color:#dcbfc0;font-size:10px;letter-spacing:3px}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}.reveal.show{opacity:1;transform:none}.delay{transition-delay:.12s}.delay2{transition-delay:.24s}.tilt{transition:transform .5s ease}.tilt:hover{transform:rotate(0deg) translateY(-7px)}.tilt-left:hover{transform:rotate(0deg) translateY(-7px)}
+
+@media(max-width:950px){
+  .topbar nav{display:none}.nav-btn{display:block}.home,.about{grid-template-columns:1fr}.home-copy{padding-right:0}.home-collage{height:620px}.about-collage{min-height:570px}.film-grid,.places-grid{grid-template-columns:1fr}.film-head{grid-template-columns:1fr}
+  .journey-grid{height:auto; display:flex; flex-direction:column; align-items:center; gap:25px;}
+  .jcard, .journey-story{position:relative !important; top:auto !important; left:auto !important; right:auto !important; bottom:auto !important; transform:none !important; width:100% !important; max-width:300px;}
+  .journey-story{border-radius:20px; height:auto; padding:30px 20px;}
+  .trait-grid{grid-template-columns:repeat(2,1fr)}.contact{grid-template-columns:1fr}.contact-note{justify-self:start;margin-top:30px}
+}
+@media(max-width:600px){
+  .section{padding:70px 5%}.home-collage{height:500px}.hero-polaroid{width:310px;height:390px}.small-polaroid{width:130px;height:160px}.about-polaroid{width:300px;height:370px}.paper-note{font-size:18px}.contact h2{font-size:55px}
+}
+.fade-out{animation:fadeOut .55s ease forwards}@keyframes fadeOut{to{opacity:0;transform:scale(1.02)}}

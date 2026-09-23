@@ -1,503 +1,665 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My Portfolio | Amelia Ahyani</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Amelia Ahyani — Kisah & Impian</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  .section {
+    transition: background-color 0.8s ease, transform 0.5s ease;
+    position: relative;
+    z-index: 2;
+  }
 
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="style.css">
+  /* Style untuk Emoji Beranimasi tepat di Background Belakang */
+  .floating-emojis {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .floating-emoji {
+    position: absolute;
+    font-size: 1.5rem;
+    user-select: none;
+    animation: floatUpAndFade 7s linear infinite;
+    opacity: 0.35;
+  }
+
+  @keyframes floatUpAndFade {
+    0% {
+      transform: translateY(105vh) scale(0.8) rotate(0deg);
+      opacity: 0;
+    }
+    20% {
+      opacity: 0.4;
+    }
+    80% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(-10vh) scale(1.2) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  /* ==========================================
+     EFEK KLIK MENU DENGAN WARNA & ANIMASI UNIK
+     ================================---------- */
+  .topbar nav a {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+  }
+
+  @keyframes popHome {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.18) rotate(-3deg); background-color: #fbcfe8; }
+    100% { transform: scale(1); }
+  }
+  @keyframes popAbout {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.18) translateY(-4px); background-color: #bae6fd; }
+    100% { transform: scale(1); }
+  }
+  @keyframes popJourney {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.18) scaleX(1.1); background-color: #bbf7d0; }
+    100% { transform: scale(1); }
+  }
+  @keyframes popFilms {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.18) rotate(4deg); background-color: #fed7aa; }
+    100% { transform: scale(1); }
+  }
+  @keyframes popPlaces {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.18) skewX(-5deg); background-color: #e9d5ff; }
+    100% { transform: scale(1); }
+  }
+  @keyframes popContact {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.18) rotate(-2deg) scaleY(1.1); background-color: #d1c4bc; color: #29201f; }
+    100% { transform: scale(1); }
+  }
+
+  .nav-clicked-home { animation: popHome 0.45s ease; }
+  .nav-clicked-about { animation: popAbout 0.45s ease; }
+  .nav-clicked-journey { animation: popJourney 0.45s ease; }
+  .nav-clicked-films { animation: popFilms 0.45s ease; }
+  .nav-clicked-places { animation: popPlaces 0.45s ease; }
+  .nav-clicked-contact { animation: popContact 0.45s ease; }
+
+  /* ==========================================
+     PERBAIKAN WARNA TEKS & TOMBOL SECTION KONTAK
+     ================================---------- */
+  #contact h2, 
+  #contact p, 
+  #contact .eyebrow, 
+  #contact .contact-note {
+    color: #2c2423 !important;
+  }
+
+  #contact .contact-links a {
+    background-color: #2c2423;
+    color: #fdfbf7;
+    border: 1px solid #2c2423;
+    transition: background 0.3s ease;
+  }
+
+  #contact .contact-links a:hover {
+    background-color: #433634;
+    color: #ffffff;
+  }
+
+  /* Perbaikan Style untuk Bagian Film agar Rapi seperti Referensi Foto */
+  .films .film-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 30px;
+  }
+
+  .film-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee5dd;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .film-image {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  .film-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .film-card .tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+  }
+
+  .film-play-btn {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #9b5f69;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+
+  .film-card h3 {
+    font-size: 1.1rem;
+    margin: 4px 0 2px;
+    color: #2c2c2c;
+  }
+
+  .film-card small {
+    color: #777;
+    font-size: 0.8rem;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .film-card p {
+    font-size: 0.82rem;
+    color: #555;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+
+  .film-card .rating {
+    font-size: 0.85rem;
+    color: #f39c12;
+    margin-bottom: 12px;
+  }
+
+  .film-card .watch {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: #b87d85;
+    color: white;
+    padding: 10px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: background 0.3s;
+  }
+
+  .film-card .watch:hover {
+    background: #a36b73;
+  }
+
+  @media (max-width: 768px) {
+    .films .film-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
 </head>
+<body>
+<!-- Container Emoji Beranimasi di Background Belakang -->
+<div class="floating-emojis" id="floatingEmojisContainer"></div>
 
-<body data-theme="home">
-
-  <div class="floating-emojis">
-    <span>✨</span>
-    <span>🌸</span>
-    <span>💖</span>
-    <span>🌿</span>
-    <span>⭐</span>
-    <span>🏔️</span>
-    <span>🌷</span>
-    <span>☁️</span>
+<div id="intro" class="intro" style="position: relative; z-index: 2;">
+  <div class="intro-photo"><img src="assets/intro-filmstrip.jpg"></div>
+  <div class="intro-center">
+    <div class="flower">✿</div>
+    <h1>AMELIA AHYANI</h1>
+    <div class="script" data-id="intro-script">kisah &amp; impian</div>
+    <p><span data-id="intro-desc">cerita • film • perjalanan • impian</span></p>
+    <div class="intro-loader"><span id="loadbar"></span></div>
+    <small id="loadtext"><span data-id="load-text-1">MEMASUKI KISAHKU...</span><br><span data-id="load-text-2">MOHON TUNGGU</span></small>
   </div>
+  <div class="intro-note"><span data-id="intro-note-1">gadis yang sama...</span><br><span data-id="intro-note-2">mimpi yang lebih besar</span></div>
+  <div class="intro-est">EST. 2025</div>
+</div>
 
-  <nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#home">Amelia Ahyani 🌸</a>
-      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto align-items-lg-center gap-3">
-          <li class="nav-item"><a class="nav-link" href="#home">Home ✨</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">About ☁️</a></li>
-          <li class="nav-item"><a class="nav-link" href="#projects">My Films 🎬</a></li>
-          <li class="nav-item"><a class="nav-link" href="#journey">My Journey 🏔️</a></li>
-          <li class="nav-item"><a class="nav-link" href="#bucketlist">Bucket List ✈️</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact 💌</a></li>
-        </ul>
-      </div>
-    </div>
+<div id="site" class="site hidden" style="position: relative; z-index: 2;">
+<header class="topbar">
+  <a class="logo nav-trigger" href="#home" data-color="#fdfbf7" data-target="home">AMELIA <span>AHYANI</span><small data-id="logo-sub">KISAH &amp; IMPIAN</small></a>
+  <nav>
+    <a href="#home" class="nav-trigger" data-color="#fdfbf7" data-target="home" data-id="nav-home">Beranda</a>
+    <a href="#about" class="nav-trigger" data-color="#f7f3ed" data-target="about" data-id="nav-about">Tentang Saya</a>
+    <a href="#journey" class="nav-trigger" data-color="#f4efe6" data-target="journey" data-id="nav-journey">Perjalanan</a>
+    <a href="#films" class="nav-trigger" data-color="#faf5f0" data-target="films" data-id="nav-films">Film Favorit</a>
+    <a href="#places" class="nav-trigger" data-color="#f2eee9" data-target="places" data-id="nav-places">Daftar Impian</a>
+    <a href="#contact" class="nav-trigger" data-color="#d9ccc6" data-target="contact" data-id="nav-contact">Kontak</a>
+    <button id="langToggle" class="pill lang-btn" style="padding: 4px 10px; font-size: 0.8rem; margin-left: 10px; cursor: pointer;">EN / ID</button>
   </nav>
+  <button class="nav-btn" id="menuBtn">☰</button>
+</header>
 
-  <section id="home" class="jumbotron initial-fade-in">
-    <div class="container">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-7 text-lg-start text-center">
-          <span class="badge bg-pink-custom px-3 py-2 rounded-pill mb-3 fw-semibold">Welcome to My World ✨</span>
-          <h1 class="display-4 fw-bold text-dark-custom mb-3">Halo, Saya <span class="text-accent-pink">Amelia Ahyani</span></h1>
-          <p class="lead subtitle-text mb-4">✨ Movie Enthusiast & Nature Explorer 🌿<br>Senang mempelajari hal baru, menonton film inspiratif, dan menikmati keindahan alam.</p>
-          <div class="d-flex justify-content-center justify-content-lg-start gap-3">
-            <a href="#about" class="btn btn-pink-gradient px-4">Kenalan Yuk 🌸</a>
-            <a href="#contact" class="btn btn-outline-custom px-4">Contact Me 💌</a>
-          </div>
-        </div>
-        
-        <div class="col-lg-5 text-center">
-          <div class="profile-container floating-element">
-            <img src="img/amel.jpeg" alt="Amelia Ahyani" class="rounded-circle profile-img-hero">
-          </div>
-        </div>
-      </div>
+<main>
+<section id="home" class="home section" data-bg="#fdfbf7">
+  <div class="home-copy reveal">
+    <div class="eyebrow" data-id="home-eyebrow">SELAMAT DATANG DI KISAHKU ─────────</div>
+    <h2 data-id="home-title">Halo, Saya<br><em>Amelia Ahyani</em></h2>
+    <h3 data-id="home-subtitle">Pecinta Film &amp; Penjelajah Alam <span>🌿</span></h3>
+    <p data-id="home-desc">Senang mempelajari hal baru, menonton film inspiratif, dan menikmati keindahan alam.</p>
+    <div class="actions">
+      <a href="#about" class="pill primary nav-trigger" data-color="#f7f3ed" data-target="about" data-id="btn-about">Kenalan Yuk →</a>
+      <a href="#contact" class="pill nav-trigger" data-color="#d9ccc6" data-target="contact" data-id="btn-contact">Hubungi Saya ✉</a>
     </div>
-  </section>
-
-  <section id="about" class="reveal-section">
-    <div class="container">
-      <div class="row text-center mb-5">
-        <div class="col">
-          <span class="badge bg-pink-custom px-3 py-2 rounded-pill mb-2 fw-semibold">Get to Know Me</span>
-          <h2 class="section-title d-inline-block">About Me ☁️</h2>
-        </div>
-      </div>
-      
-      <div class="row justify-content-center align-items-center g-4">
-        <div class="col-lg-4 text-center">
-          <div class="about-img-container floating-element">
-            <img src="img/amel.jpeg" alt="Amelia Ahyani" class="about-profile-img">
-          </div>
-        </div>
-
-        <div class="col-lg-7">
-          <div class="about-card p-4 p-md-5 floating-element">
-            <div class="about-icon-box mb-3">
-              <i class="bi bi-heart-fill"></i>
-            </div>
-            <h3 class="fw-bold text-dark-custom mb-3">Pribadi yang Aktif & Ceria ✨</h3>
-            <p class="text-secondary-custom mb-4" id="pencil-p1" data-original="Halo! Saya <strong>Amelia Ahyani</strong>. Saya merupakan seorang pelajar yang selalu antusias dalam mempelajari hal-hal baru, mencoba berbagai tantangan menarik, dan menjalani hari-hari dengan energi positif.">
-              Halo! Saya <strong>Amelia Ahyani</strong>. Saya merupakan seorang pelajar yang selalu antusias dalam mempelajari hal-hal baru, mencoba berbagai tantangan menarik, dan menjalani hari-hari dengan energi positif.
-            </p>
-            <p class="text-secondary-custom mb-0" id="pencil-p2" data-original="Saya sangat menyukai dunia sinema dan menonton film-film seru 🎬, serta menikmati keindahan alam terbuka dan pegunungan 🌲 untuk mencari ketenangan sekaligus mengabadikan momen berharga.">
-              Saya sangat menyukai dunia sinema dan menonton film-film seru 🎬, serta menikmati keindahan alam terbuka dan pegunungan 🌲 untuk mencari ketenangan sekaligus mengabadikan momen berharga.
-            </p>
-          </div>
-        </div>
-      </div>
+    <blockquote data-id="home-quote">“Film yang bagus,<br>tempat yang indah,<br>dan diriku yang lebih baik.”</blockquote>
+  </div>
+  <div class="home-collage reveal delay">
+    <div class="polaroid hero-polaroid tilt">
+      <img src="assets/profile-home.jpg">
+      <span data-id="polaroid-1">Hanya seorang gadis<br>dengan mimpi besar ♡</span>
     </div>
-  </section>
+    <div class="tape-note" data-id="tape-note">Orang Baik<br>Film Bagus<br>Kenangan Indah ♡</div>
+    <div class="small-polaroid p1"><img src="assets/journey-2.jpg"><span></span></div>
+  </div>
+</section>
 
-  <section id="projects" class="reveal-section">
-    <div class="container">
-      <div class="row text-center mb-5">
-        <div class="col">
-          <span class="badge bg-pink-custom px-3 py-2 rounded-pill mb-2 fw-semibold">Favorite Collection</span>
-          <h2 class="section-title d-inline-block">My Films 🎬</h2>
-          <p class="subtitle-text mt-2">Koleksi film favorit yang bisa langsung diklik dan ditonton secara online</p>
-        </div>
-      </div>
-      <div class="row justify-content-center g-4">
-        <div class="col-lg-4 col-md-6">
-          <div class="aesthetic-card h-100 d-flex flex-column">
-            <div class="book-img-wrapper">
-              <img src="img/films/mak beti.jpg" class="book-img" alt="Mak Beti">
-              <span class="badge bg-pink-custom position-absolute top-0 end-0 m-3 shadow-sm">Komedi</span>
-            </div>
-            <div class="card-body p-4 d-flex flex-column justify-content-between">
-              <div>
-                <h5 class="fw-bold text-dark-custom">Official Mak Beti</h5>
-                <p class="subtitle-text small mb-3">Kreator: Arif Muhammad</p>
-                <p class="small text-secondary-custom">Keluarga komedi paling kocak khas Sumatera Utara yang selalu sukses bikin ketawa ngakak 🤣.</p>
-                <div class="text-warning mt-2 mb-3">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-              </div>
-              <a href="https://www.youtube.com/@ArifMuhammad_MakBeti" target="_blank" class="btn btn-outline-custom w-100 text-center mt-2 text-decoration-none">
-                <i class="bi bi-play-circle-fill me-2"></i> Watch Movie 🍿
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="aesthetic-card h-100 d-flex flex-column">
-            <div class="book-img-wrapper">
-              <img src="img/films/titanic.jpg" class="book-img" alt="Titanic">
-              <span class="badge bg-pink-custom position-absolute top-0 end-0 m-3 shadow-sm">Sad / Romance</span>
-            </div>
-            <div class="card-body p-4 d-flex flex-column justify-content-between">
-              <div>
-                <h5 class="fw-bold text-dark-custom">Titanic</h5>
-                <p class="subtitle-text small mb-3">Sutradara: James Cameron</p>
-                <p class="small text-secondary-custom">Kisah cinta tragis dan mengharukan di atas kapal pesiar megah yang karam 🚢💧.</p>
-                <div class="text-warning mt-2 mb-3">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-              </div>
-              <a href="https://www.youtube.com/results?search_query=Titanic+full+movie" target="_blank" class="btn btn-outline-custom w-100 text-center mt-2 text-decoration-none">
-                <i class="bi bi-play-circle-fill me-2"></i> Watch Movie 🍿
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="aesthetic-card h-100 d-flex flex-column">
-            <div class="book-img-wrapper">
-              <img src="img/films/hatci.jpg" class="book-img" alt="Hachi">
-              <span class="badge bg-pink-custom position-absolute top-0 end-0 m-3 shadow-sm">Sad / Drama</span>
-            </div>
-            <div class="card-body p-4 d-flex flex-column justify-content-between">
-              <div>
-                <h5 class="fw-bold text-dark-custom">Hachi: A Dog's Tale</h5>
-                <p class="subtitle-text small mb-3">Sutradara: Lasse Hallström</p>
-                <p class="small text-secondary-custom">Kisah kesetiaan seekor anjing kepada majikannya yang dijamin bikin nangis sesenggukan 😭🐾.</p>
-                <div class="text-warning mt-2 mb-3">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-              </div>
-              <a href="https://www.youtube.com/results?search_query=Hachi+A+Dog+s+Tale+full+movie" target="_blank" class="btn btn-outline-custom w-100 text-center mt-2 text-decoration-none">
-                <i class="bi bi-play-circle-fill me-2"></i> Watch Movie 🍿
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+<section id="about" class="section about" data-bg="#f7f3ed">
+  <div class="about-collage reveal">
+    <div class="paper-note" data-id="paper-note">Diriku yang lebih baik<br>selalu berproses ♡</div>
+    <div class="polaroid about-polaroid tilt-left"><img src="assets/profile-about.jpg"><span>Amelia Ahyani ♡</span></div>
+    <div class="mini-photo"><img src="assets/journey-3.jpg"></div>
+  </div>
+  <div class="about-copy reveal">
+    <div class="eyebrow" data-id="about-eyebrow">KENALAN DENGAN SAYA</div>
+    <h2 data-id="about-title">Tentang Saya <span>☁</span></h2>
+    <div class="script" data-id="about-script">Gadis yang sama... Mimpi lebih besar ♡</div>
+    <div class="about-card">
+      <h3 data-id="card-title">♥ Pribadi yang Aktif &amp; Ceria ✨</h3>
+      <p data-id="card-p1">Halo! Saya Amelia Ahyani. Saya merupakan seorang pelajar yang selalu antusias dalam mempelajari hal-hal baru, mencoba berbagai tantangan menarik, dan menjalani hari-hari dengan energi positif.</p>
+      <p data-id="card-p2">Saya sangat menyukai dunia cinema dan menonton film-film seru 🎬 serta menikmati keindahan alam terbuka dan pegunungan 🏔️ untuk mencari ketenangan sekaligus mengabadikan momen berharga.</p>
     </div>
-  </section>
-
-  <section id="journey" class="reveal-section">
-    <div class="container">
-      <div class="row text-center mb-5">
-        <div class="col">
-          <span class="badge bg-pink-custom px-3 py-2 rounded-pill mb-2 fw-semibold">Nature & Adventure</span>
-          <h2 class="section-title d-inline-block">My Journey 🏔️</h2>
-          <p class="subtitle-text mt-2">Momen berharga saat menjelajah keindahan alam</p>
-        </div>
-      </div>
-      
-      <div class="polaroid-grid-container position-relative py-4">
-        
-        <div class="journey-center-badge shadow-lg">
-          <h6 class="fw-bold text-dark-custom mb-1">Pengalaman Naik Gunung</h6>
-          <p class="journey-desc-text text-secondary-custom mb-0" id="journey-desc" data-original="Salah satu pengalaman paling berkesan saat mendaki gunung. Perjalanan ini melatih kesabaran, kerja sama tim, dan memberikan hadiah pemandangan alam terindah yang menenangkan jiwa 🏔️💚.">
-            Salah satu pengalaman paling berkesan saat mendaki gunung. Perjalanan ini melatih kesabaran, kerja sama tim, dan memberikan hadiah pemandangan alam terindah yang menenangkan jiwa 🏔️💚.
-          </p>
-        </div>
-
-        <div class="row justify-content-center g-5 mb-4">
-          <div class="col-auto">
-            <div class="polaroid-card polaroid-tilt-1">
-              <img src="img/gunung1.jpeg" alt="Gunung 1">
-              <p class="polaroid-caption">Menyatu dengan Alam 🌲</p>
-            </div>
-          </div>
-          <div class="col-auto">
-            <div class="polaroid-card polaroid-tilt-2">
-              <img src="img/gunung2.jpeg" alt="Gunung 2">
-              <p class="polaroid-caption">Langkah Penuh Semangat ⛺</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="row justify-content-center g-5">
-          <div class="col-auto">
-            <div class="polaroid-card polaroid-tilt-3">
-              <img src="img/gunung3.jpeg" alt="Gunung 3">
-              <p class="polaroid-caption">Pemandangan Puncak ⛰️</p>
-            </div>
-          </div>
-          <div class="col-auto">
-            <div class="polaroid-card polaroid-tilt-4">
-              <img src="img/gunung4.jpeg" alt="Gunung 4">
-              <p class="polaroid-caption">Momen Tak Terlupakan ✨</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
+    <div class="trait-grid">
+      <div><b>🎓</b><strong data-id="trait-1-title">Pelajar</strong><span data-id="trait-1-desc">Terus belajar<br>dan berkembang</span></div>
+      <div><b>🎬</b><strong data-id="trait-2-title">Pecinta Film</strong><span data-id="trait-2-desc">Menonton film,<br>menikmati cerita baru</span></div>
+      <div><b>🏔️</b><strong data-id="trait-3-title">Penjelajah Alam</strong><span data-id="trait-3-desc">Mencari ketenangan<br>di alam</span></div>
+      <div><b>♥</b><strong data-id="trait-4-title">Pikiran Positif</strong><span data-id="trait-4-desc">Selalu percaya<br>pada proses</span></div>
     </div>
-  </section>
+    <div class="quote-strip" data-id="about-quote">“Sedikit kemajuan setiap hari membuahkan hasil yang besar.” ♥</div>
+  </div>
+</section>
 
-  <section id="bucketlist" class="reveal-section">
-    <div class="container">
-      <div class="row text-center mb-5">
-        <div class="col">
-          <span class="badge bg-pink-custom px-3 py-2 rounded-pill mb-2 fw-semibold">Dream Destinations</span>
-          <h2 class="section-title d-inline-block">Places I Want to See ✈️</h2>
-          <p class="subtitle-text mt-2">Daftar tempat impian yang sangat ingin dikunjungi di masa depan</p>
-        </div>
-      </div>
-      
-      <div class="row justify-content-center g-4">
-        <div class="col-lg-4 col-md-6">
-          <div class="bucket-card h-100 d-flex flex-column">
-            <div class="bucket-img-wrapper">
-              <img src="img/sakura.jpg" class="bucket-img" alt="Japan">
-              <span class="badge bg-japan-badge position-absolute top-0 end-0 m-3 shadow-sm">Japan 🇯🇵</span>
-            </div>
-            <div class="card-body p-4 d-flex flex-column justify-content-between">
-              <div>
-                <h5 class="fw-bold text-dark-custom">Negeri Sakura, Jepang</h5>
-                <p class="small text-secondary-custom mt-2">Menikmati keindahan bunga sakura bermekaran, budaya tradisional yang kental, serta kota modern yang estetis.</p>
-              </div>
-              <div class="mt-3 pt-3 border-top border-light-custom text-center">
-                <span class="badge-dream">✨ Must Visit Spot</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="bucket-card h-100 d-flex flex-column">
-            <div class="bucket-img-wrapper">
-              <img src="img/pegunungan.jpg" class="bucket-img" alt="Swiss">
-              <span class="badge bg-swiss-badge position-absolute top-0 end-0 m-3 shadow-sm">Swiss 🇨🇭</span>
-            </div>
-            <div class="card-body p-4 d-flex flex-column justify-content-between">
-              <div>
-                <h5 class="fw-bold text-dark-custom">Pegunungan Alpen, Swiss</h5>
-                <p class="small text-secondary-custom mt-2">Menyaksikan pemandangan salju abadi Pegunungan Alpen, padang rumput hijau yang luas, dan desa terindah di dunia.</p>
-              </div>
-              <div class="mt-3 pt-3 border-top border-light-custom text-center">
-                <span class="badge-dream">✨ Nature Paradise</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="bucket-card h-100 d-flex flex-column">
-            <div class="bucket-img-wrapper">
-              <img src="img/pulau.jpg" class="bucket-img" alt="Bali">
-              <span class="badge bg-bali-badge position-absolute top-0 end-0 m-3 shadow-sm">Bali 🇮🇩</span>
-            </div>
-            <div class="card-body p-4 d-flex flex-column justify-content-between">
-              <div>
-                <h5 class="fw-bold text-dark-custom">Pulau Dewata, Bali</h5>
-                <p class="small text-secondary-custom mt-2">Menikmati ketenangan pantai berpasir putih, matahari terbenam yang memukau, serta keindahan budayanya yang khas.</p>
-              </div>
-              <div class="mt-3 pt-3 border-top border-light-custom text-center">
-                <span class="badge-dream">✨ Tropical Escape</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<section id="journey" class="section journey" data-bg="#f4efe6">
+  <div class="section-head reveal">
+    <div class="eyebrow" data-id="journey-eyebrow">PERJALANAN MEMBUATKU LEBIH BAIK</div>
+    <h2 data-id="journey-title">Perjalanan Saya <span>🏔️</span></h2>
+    <p data-id="journey-desc">Setiap perjalanan punya cerita, dan setiap cerita selalu meninggalkan pelajaran berharga.</p>
+  </div>
+  
+  <div class="journey-collage-container" style="position: relative; width: 100%; max-width: 950px; height: 520px; margin: 40px auto 0;">
+    <div class="polaroid jcard j1 reveal" style="position: absolute; top: 0; left: 40px; width: 260px; transform: rotate(-4deg); z-index: 2;">
+      <img src="assets/journey-1.jpg" style="width: 100%; display: block;">
     </div>
-  </section>
-
-  <section id="contact" class="reveal-section">
-    <div class="container">
-      <div class="row text-center mb-5">
-        <div class="col">
-          <span class="badge bg-pink-custom px-3 py-2 rounded-pill mb-2 fw-semibold">Let's Connect</span>
-          <h2 class="section-title d-inline-block">Contact Me 💌</h2>
-          <p class="subtitle-text mt-2">Mari terhubung dan berinteraksi lebih dekat</p>
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <div class="aesthetic-card p-4 p-md-5">
-            <form>
-              <div class="mb-3">
-                <label class="form-label fw-semibold text-dark-custom">Nama Lengkap</label>
-                <input type="text" class="form-control" placeholder="Masukkan nama Anda">
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-semibold text-dark-custom">Alamat Email</label>
-                <input type="email" class="form-control" placeholder="nama@email.com">
-              </div>
-              <div class="mb-4">
-                <label class="form-label fw-semibold text-dark-custom">Pesan Anda</label>
-                <textarea class="form-control" rows="4" placeholder="Tuliskan pesan di sini..."></textarea>
-              </div>
-              <button type="submit" class="btn btn-pink-gradient w-100">Kirim Pesan ✨</button>
-            </form>
-            <div class="text-center mt-5 pt-3 border-top border-light-custom">
-              <p class="mb-1 small subtitle-text">Instagram: <strong class="text-dark-custom">@amliaynie</strong></p>
-              <p class="mb-4 small subtitle-text">WhatsApp: <strong class="text-dark-custom">081265683638</strong></p>
-              <div class="d-flex justify-content-center gap-3">
-                <a href="https://www.instagram.com/amliaynie/" target="_blank" class="social-icon"><i class="bi bi-instagram"></i></a>
-                <a href="https://wa.me/6281265683638" target="_blank" class="social-icon"><i class="bi bi-whatsapp"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="polaroid jcard j2 reveal delay" style="position: absolute; top: 10px; right: 40px; width: 260px; transform: rotate(4deg); z-index: 2;">
+      <img src="assets/journey-2.jpg" style="width: 100%; display: block;">
     </div>
-  </section>
+    <div class="journey-story-center reveal" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; background: #fdfbf7; padding: 25px; border-radius: 50%; width: 330px; height: 330px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.12); border: 2px dashed #dcd6cd;">
+      <span style="font-size: 1.1rem; margin-bottom: -2px;">❧</span>
+      <h3 data-id="j-story-title" style="margin: 6px 0 4px; font-size: 1.05rem; font-family: inherit;">Pengalaman Naik Gunung</h3>
+      <p data-id="j-story-desc" style="font-size: 0.78rem; line-height: 1.35; margin: 0; padding: 0 15px;">Salah satu pengalaman paling berkesan saat mendaki gunung. Perjalanan ini melatih kesabaran, kerja sama tim, dan memberikan hadiah pemandangan alam terindah yang menenangkan jiwa 🏔️</p>
+      <b style="margin-top: 4px; font-size: 0.9rem;">♡</b>
+    </div>
+    <div class="polaroid jcard j3 reveal" style="position: absolute; bottom: 0; left: 80px; width: 260px; transform: rotate(3deg); z-index: 2;">
+      <img src="assets/journey-3.jpg" style="width: 100%; display: block;">
+    </div>
+    <div class="polaroid jcard j4 reveal delay" style="position: absolute; bottom: 0; right: 80px; width: 260px; transform: rotate(-3deg); z-index: 2;">
+      <img src="assets/journey-4.jpg" style="width: 100%; display: block;">
+    </div>
+  </div>
+</section>
 
-  <footer class="text-center py-4">
-    <p class="mb-0 small subtitle-text">©️ 2026 Amelia Ahyani. All Rights Reserved. Crafted with ✨ & 💖</p>
-  </footer>
+<section id="films" class="section films" data-bg="#faf5f0">
+  <div class="section-head film-head reveal">
+    <div>
+      <div class="eyebrow" data-id="film-eyebrow">KOLEKSI DARI</div>
+      <h2 data-id="film-title">Film Favorit Saya 🎬</h2>
+      <p data-id="film-desc">Beberapa cerita selalu membekas di hati. Ini adalah beberapa film favorit saya yang menginspirasi, menghibur, dan mengingatkan saya akan indahnya hidup.</p>
+    </div>
+    <blockquote data-id="film-quote">“Film yang bagus<br>membuat hari buruk terasa lebih baik.”</blockquote>
+  </div>
+  <div class="film-grid">
+    <article class="film-card reveal">
+      <div class="film-image">
+        <img src="assets/film-1.jpg">
+        <span class="tag" data-id="f1-tag">Komedi</span>
+        <a href="https://www.youtube.com/results?search_query=Official+Mak+Beti" target="_blank" class="film-play-btn">▶</a>
+      </div>
+      <h3 data-id="f1-title">Official Mak Beti</h3>
+      <small data-id="f1-director">Kreator: Arif Muhammad</small>
+      <p data-id="f1-desc">Keluarga komedi paling kocak khas Sumatera Utara yang selalu sukses bikin ketawa ngakak.</p>
+      <div class="rating">★★★★★ <b>5.0</b></div>
+      <a class="watch" href="https://www.youtube.com/results?search_query=Official+Mak+Beti" target="_blank" data-id="watch-text">◉ Tonton Film</a>
+    </article>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <article class="film-card reveal delay">
+      <div class="film-image">
+        <img src="assets/film-2.jpeg">
+        <span class="tag" data-id="f2-tag">Sedih / Romantis</span>
+        <a href="https://www.youtube.com/results?search_query=Titanic+Full+Movie" target="_blank" class="film-play-btn">▶</a>
+      </div>
+      <h3 data-id="f2-title">Titanic</h3>
+      <small data-id="f2-director">Sutradara: James Cameron</small>
+      <p data-id="f2-desc">Kisah cinta tragis dan mengharukan di atas kapal pesiar megah yang karam.</p>
+      <div class="rating">★★★★★ <b>4.8</b></div>
+      <a class="watch" href="https://www.youtube.com/results?search_query=Titanic+Full+Movie" target="_blank" data-id="watch-text">◉ Tonton Film</a>
+    </article>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const el1 = document.getElementById("pencil-p1");
-      const el2 = document.getElementById("pencil-p2");
-      const journeyDesc = document.getElementById("journey-desc");
+    <article class="film-card reveal delay2">
+      <div class="film-image">
+        <img src="assets/film-3.jpg">
+        <span class="tag" data-id="f3-tag">Sedih / Drama</span>
+        <a href="https://www.youtube.com/results?search_query=Hachi+A+Dogs+Tale" target="_blank" class="film-play-btn">▶</a>
+      </div>
+      <h3 data-id="f3-title">Hachi: A Dog’s Tale</h3>
+      <small data-id="f3-director">Sutradara: Lasse Hallström</small>
+      <p data-id="f3-desc">Kisah kesetiaan seekor anjing kepada majikannya yang dijamin bikin nangis sesenggukan.</p>
+      <div class="rating">★★★★★ <b>4.9</b></div>
+      <a class="watch" href="https://www.youtube.com/results?search_query=Hachi+A+Dogs+Tale" target="_blank" data-id="watch-text">◉ Tonton Film</a>
+    </article>
+  </div>
+</section>
 
-      // Fungsi Animasi Mengetik About
-      function playAboutAnimation() {
-        if (!el1 || !el2) return;
-        const txt1 = el1.getAttribute("data-original");
-        const txt2 = el2.getAttribute("data-original");
+<section id="places" class="section places" data-bg="#f2eee9">
+  <div class="section-head reveal">
+    <div class="eyebrow" data-id="place-eyebrow">TEMPAT YANG INGIN KUNJUNGI</div>
+    <h2 data-id="place-title">Daftar Impian Tempat ✈</h2>
+    <p data-id="place-desc">Daftar tempat impian yang sangat ingin dikunjungi di masa depan.</p>
+  </div>
+  <div class="places-grid">
+    <article class="place-card reveal"><div class="stamp" data-id="p1-stamp">JEPANG</div><img src="assets/place-1.jpg"><h3 data-id="p1-title">Negeri Sakura, Jepang</h3><p data-id="p1-desc">Menikmati keindahan bunga sakura bermekaran, budaya tradisional yang kental, serta kota modern yang estetik.</p></article>
+    <article class="place-card reveal delay"><div class="stamp green" data-id="p2-stamp">SWISS</div><img src="assets/place-2.jpg"><h3 data-id="p2-title">Pegunungan Alpen, Swiss</h3><p data-id="p2-desc">Menyaksikan pemandangan salju abadi Pegunungan Alpen, padang rumput hijau yang luas, dan desa terindah di dunia.</p></article>
+    <article class="place-card reveal delay2"><div class="stamp" data-id="p3-stamp">BALI</div><img src="assets/place-3.jpg"><h3 data-id="p3-title">Pulau Dewata, Bali</h3><p data-id="p3-desc">Menikmati ketenangan pantai berpasir putih, matahari terbenam yang memukau, serta keindahan budaya yang khas.</p></article>
+  </div>
+</section>
 
-        el1.innerHTML = "";
-        el2.innerHTML = "";
-        el1.classList.add("pencil-cursor");
+<section id="contact" class="contact section" data-bg="#d9ccc6">
+  <div class="reveal">
+    <div class="eyebrow" data-id="contact-eyebrow">TETAP TERHUBUNG</div>
+    <h2 data-id="contact-title">Hubungi Saya ♡</h2>
+    <p data-id="contact-desc">Kalau mau ngobrol, berbagi cerita, atau sekadar say hi, jangan ragu untuk menghubungi ya.</p>
+    <div class="contact-links">
+      <a href="https://api.whatsapp.com/send?phone=6281265683638&text=Halo%20Amelia,%20aku%20mau%20kenalan%20dong!" target="_blank">💬 WhatsApp</a>
+      <a href="https://instagram.com/amliaynie" target="_blank">◎ Instagram</a>
+    </div>
+  </div>
+  <div class="contact-note" data-id="contact-note">“Kumpulkan momen,<br>bukan barang.”<br><span>— Amelia</span></div>
+</section>
+</main>
+<footer class="footer" data-id="footer-text" style="position: relative; z-index: 2;">AMELIA AHYANI · KISAH &amp; IMPIAN · EST. 2025 ♡</footer>
+</div>
 
-        let i = 0;
-        function typeWriter() {
-          if (i < txt1.length) {
-            el1.innerHTML += txt1.charAt(i);
-            i++;
-            setTimeout(typeWriter, 12);
-          } else {
-            el1.classList.remove("pencil-cursor");
-            el2.classList.add("pencil-cursor");
-            let j = 0;
-            function typeWriter2() {
-              if (j < txt2.length) {
-                el2.innerHTML += txt2.charAt(j);
-                j++;
-                setTimeout(typeWriter2, 12);
-              } else {
-                el2.classList.remove("pencil-cursor");
-              }
-            }
-            setTimeout(typeWriter2, 150);
-          }
-        }
-        typeWriter();
-      }
+<script>
+const translations = {
+  id: {
+    "intro-script": "kisah & impian",
+    "intro-desc": "cerita • film • perjalanan • impian",
+    "load-text-1": "MEMASUKI KISAHKU...",
+    "load-text-2": "MOHON TUNGGU",
+    "intro-note-1": "gadis yang sama...",
+    "intro-note-2": "mimpi yang lebih besar",
+    "logo-sub": "KISAH & IMPIAN",
+    "nav-home": "Beranda",
+    "nav-about": "Tentang Saya",
+    "nav-journey": "Perjalanan",
+    "nav-films": "Film Favorit",
+    "nav-places": "Daftar Impian",
+    "nav-contact": "Kontak",
+    "home-eyebrow": "SELAMAT DATANG DI KISAHKU ─────────",
+    "home-title": "Halo, Saya<br><em>Amelia Ahyani</em>",
+    "home-subtitle": "Pecinta Film &amp; Penjelajah Alam <span>🌿</span>",
+    "home-desc": "Senang mempelajari hal baru, menonton film inspiratif, dan menikmati keindahan alam.",
+    "btn-about": "Kenalan Yuk →",
+    "btn-contact": "Hubungi Saya ✉",
+    "home-quote": "“Film yang bagus,<br>tempat yang indah,<br>dan diriku yang lebih baik.”",
+    "polaroid-1": "Hanya seorang gadis<br>dengan mimpi besar ♡",
+    "tape-note": "Orang Baik<br>Film Bagus<br>Kenangan Indah ♡",
+    "paper-note": "Diriku yang lebih baik<br>selalu berproses ♡",
+    "about-eyebrow": "KENALAN DENGAN SAYA",
+    "about-title": "Tentang Saya <span>☁</span>",
+    "about-script": "Gadis yang sama... Mimpi lebih besar ♡",
+    "card-title": "♥ Pribadi yang Aktif &amp; Ceria ✨",
+    "card-p1": "Halo! Saya Amelia Ahyani. Saya merupakan seorang pelajar yang selalu antusias dalam mempelajari hal-hal baru, mencoba berbagai tantangan menarik, dan menjalani hari-hari dengan energi positif.",
+    "card-p2": "Saya sangat menyukai dunia cinema dan menonton film-film seru 🎬 serta menikmati keindahan alam terbuka dan pegunungan 🏔️ untuk mencari ketenangan sekaligus mengabadikan momen berharga.",
+    "trait-1-title": "Pelajar",
+    "trait-1-desc": "Terus belajar<br>dan berkembang",
+    "trait-2-title": "Pecinta Film",
+    "trait-2-desc": "Menonton film,<br>menikmati cerita baru",
+    "trait-3-title": "Penjelajah Alam",
+    "trait-3-desc": "Mencari ketenangan<br>di alam",
+    "trait-4-title": "Pikiran Positif",
+    "trait-4-desc": "Selalu percaya<br>pada proses",
+    "about-quote": "“Sedikit kemajuan setiap hari membuahkan hasil yang besar.” ♥",
+    "journey-eyebrow": "PERJALANAN MEMBUATKU LEBIH BAIK",
+    "journey-title": "Perjalanan Saya <span>🏔️</span>",
+    "journey-desc": "Setiap perjalanan punya cerita, dan setiap cerita selalu meninggalkan pelajaran berharga.",
+    "j-story-title": "Pengalaman Naik Gunung",
+    "j-story-desc": "Salah satu pengalaman paling berkesan saat mendaki gunung. Perjalanan ini melatih kesabaran, kerja sama tim, dan memberikan hadiah pemandangan alam terindah yang menenangkan jiwa 🏔️",
+    "film-eyebrow": "KOLEKSI DARI",
+    "film-title": "Film Favorit Saya 🎬",
+    "film-desc": "Beberapa cerita selalu membekas di hati. Ini adalah beberapa film favorit saya yang menginspirasi, menghibur, dan mengingatkan saya akan indahnya hidup.",
+    "film-quote": "“Film yang bagus<br>membuat hari buruk terasa lebih baik.”",
+    "f1-tag": "Komedi",
+    "f1-director": "Kreator: Arif Muhammad",
+    "f1-desc": "Keluarga komedi paling kocak khas Sumatera Utara yang selalu sukses bikin ketawa ngakak.",
+    "f2-tag": "Sedih / Romantis",
+    "f2-director": "Sutradara: James Cameron",
+    "f2-desc": "Kisah cinta tragis dan mengharukan di atas kapal pesiar megah yang karam.",
+    "f3-tag": "Sedih / Drama",
+    "f3-director": "Sutradara: Lasse Hallström",
+    "f3-desc": "Kisah kesetiaan seekor anjing kepada majikannya yang dijamin bikin nangis sesenggukan.",
+    "watch-text": "◉ Tonton Film",
+    "place-eyebrow": "TEMPAT YANG INGIN KUNJUNGI",
+    "place-title": "Daftar Impian Tempat ✈",
+    "place-desc": "Daftar tempat impian yang sangat ingin dikunjungi di masa depan.",
+    "p1-stamp": "JEPANG",
+    "p1-title": "Negeri Sakura, Jepang",
+    "p1-desc": "Menikmati keindahan bunga sakura bermekaran, budaya tradisional yang kental, serta kota modern yang estetik.",
+    "p2-stamp": "SWISS",
+    "p2-title": "Pegunungan Alpen, Swiss",
+    "p2-desc": "Menyaksikan pemandangan salju abadi Pegunungan Alpen, padang rumput hijau yang luas, dan desa terindah di dunia.",
+    "p3-stamp": "BALI",
+    "p3-title": "Pulau Dewata, Bali",
+    "p3-desc": "Menikmati ketenangan pantai berpasir putih, matahari terbenam yang memukau, serta keindahan budaya yang khas.",
+    "contact-eyebrow": "TETAP TERHUBUNG",
+    "contact-title": "Hubungi Saya ♡",
+    "contact-desc": "Kalau mau ngobrol, berbagi cerita, atau sekadar say hi, jangan ragu untuk menghubungi ya.",
+    "contact-note": "“Kumpulkan momen,<br>bukan barang.”<br><span>— Amelia</span>",
+    "footer-text": "AMELIA AHYANI · KISAH & IMPIAN · EST. 2025 ♡"
+  },
+  en: {
+    "intro-script": "stories & dreams",
+    "intro-desc": "stories • films • journeys • dreams",
+    "load-text-1": "ENTERING MY STORY...",
+    "load-text-2": "PLEASE WAIT",
+    "intro-note-1": "same girl...",
+    "intro-note-2": "bigger dreams",
+    "logo-sub": "STORIES & DREAMS",
+    "nav-home": "Home",
+    "nav-about": "About Me",
+    "nav-journey": "My Journey",
+    "nav-films": "My Films",
+    "nav-places": "Bucket List",
+    "nav-contact": "Contact",
+    "home-eyebrow": "WELCOME TO MY STORY ─────────",
+    "home-title": "Hello, I'm<br><em>Amelia Ahyani</em>",
+    "home-subtitle": "Movie Enthusiast &amp; Nature Explorer <span>🌿</span>",
+    "home-desc": "Enjoying learning new things, watching inspiring films, and appreciating the beauty of nature.",
+    "btn-about": "Get to Know Me →",
+    "btn-contact": "Contact Me ✉",
+    "home-quote": "“Good movies,<br>beautiful places,<br>and a better me.”",
+    "polaroid-1": "Just a girl<br>with big dreams ♡",
+    "tape-note": "Good People<br>Good Movies<br>Good Memories ♡",
+    "paper-note": "A better<br>me is always<br>a work in<br>progress ♡",
+    "about-eyebrow": "GET TO KNOW ME",
+    "about-title": "About Me <span>☁</span>",
+    "about-script": "Same girl... Bigger dreams ♡",
+    "card-title": "♥ An Active &amp; Cheerful Personality ✨",
+    "card-p1": "Hi! I'm Amelia Ahyani. I am a student who is always enthusiastic about learning new things, trying interesting challenges, and living days with positive energy.",
+    "card-p2": "I really love the world of cinema and watching exciting movies 🎬 as well as enjoying the beauty of the outdoors and mountains 🏔️ to find peace while capturing precious moments.",
+    "trait-1-title": "Student",
+    "trait-1-desc": "Always learning<br>and growing",
+    "trait-2-title": "Movie Enthusiast",
+    "trait-2-desc": "Watching films,<br>enjoying new stories",
+    "trait-3-title": "Nature Explorer",
+    "trait-3-desc": "Finding peace<br>in nature",
+    "trait-4-title": "Positive Mindset",
+    "trait-4-desc": "Always believing<br>in the process",
+    "about-quote": "“A little progress every day leads to big results.” ♥",
+    "journey-eyebrow": "JOURNEY MAKES A BETTER ME",
+    "journey-title": "My Journey <span>🏔️</span>",
+    "journey-desc": "Every journey has a story, and every story leaves behind valuable lessons.",
+    "j-story-title": "Mountain Climbing Experience",
+    "j-story-desc": "One of the most memorable experiences while hiking a mountain. This journey trains patience, teamwork, and rewards you with the most calming natural scenery 🏔️",
+    "film-eyebrow": "A COLLECTION OF",
+    "film-title": "My Films 🎬",
+    "film-desc": "Some stories stay with us forever. Here are a few of my favorite movies that inspire, comfort, and remind me to see the beauty in life.",
+    "film-quote": "“Good movies<br>make a bad day feel better.”",
+    "f1-tag": "Comedy",
+    "f1-director": "Creator: Arif Muhammad",
+    "f1-desc": "The funniest North Sumatra comedy family that always succeeds in making everyone laugh out loud.",
+    "f2-tag": "Sad / Romance",
+    "f2-director": "Director: James Cameron",
+    "f2-desc": "A tragic and touching love story aboard a magnificent sinking cruise ship.",
+    "f3-tag": "Sad / Drama",
+    "f3-director": "Director: Lasse Hallström",
+    "f3-desc": "The loyal story of a dog to his master that is guaranteed to make you cry your eyes out.",
+    "watch-text": "◉ Watch Movie",
+    "place-eyebrow": "PLACES I WANT TO SEE",
+    "place-title": "Places I Want to See ✈",
+    "place-desc": "A list of dream places I really want to visit in the future.",
+    "p1-stamp": "JAPAN",
+    "p1-title": "Land of the Rising Sun, Japan",
+    "p1-desc": "Enjoying the beauty of blooming cherry blossoms, rich traditional culture, and aesthetic modern cities.",
+    "p2-stamp": "SWITZERLAND",
+    "p2-title": "The Alps, Switzerland",
+    "p2-desc": "Witnessing the eternal snow views of the Alps, vast green meadows, and the most beautiful villages in the world.",
+    "p3-stamp": "BALI",
+    "p3-title": "Island of the Gods, Bali",
+    "p3-desc": "Enjoying the tranquility of white sandy beaches, stunning sunsets, and unique cultural beauty.",
+    "contact-eyebrow": "LET'S KEEP IN TOUCH",
+    "contact-title": "Contact Me ♡",
+    "contact-desc": "If you want to chat, share stories, or just say hi, feel free to reach out.",
+    "contact-note": "“Collect moments,<br>not things.”<br><span>— Amelia</span>",
+    "footer-text": "AMELIA AHYANI · STORIES & DREAMS · EST. 2025 ♡"
+  }
+};
 
-      // Fungsi Animasi Mengetik Journey
-      function playJourneyAnimation() {
-        if (!journeyDesc) return;
-        const jTxt = journeyDesc.getAttribute("data-original");
-        journeyDesc.innerHTML = "";
-        journeyDesc.classList.add("pencil-cursor");
-        let k = 0;
-        function typeJourney() {
-          if (k < jTxt.length) {
-            journeyDesc.innerHTML += jTxt.charAt(k);
-            k++;
-            setTimeout(typeJourney, 10);
-          } else {
-            journeyDesc.classList.remove("pencil-cursor");
-          }
-        }
-        typeJourney();
-      }
+let currentLang = 'id';
+const langToggleBtn = document.getElementById('langToggle');
 
-      // Intersection Observer untuk Scroll Otomatis ke Bawah
-      const aboutObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            playAboutAnimation();
-            aboutObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.5 });
-      if (document.getElementById("about")) aboutObserver.observe(document.getElementById("about"));
+langToggleBtn.addEventListener('click', () => {
+  currentLang = currentLang === 'id' ? 'en' : 'id';
+  langToggleBtn.textContent = currentLang === 'id' ? 'EN / ID' : 'ID / EN';
+  
+  document.querySelectorAll('[data-id]').forEach(el => {
+    const key = el.getAttribute('data-id');
+    if (translations[currentLang][key]) {
+      el.innerHTML = translations[currentLang][key];
+    }
+  });
+});
 
-      const journeyObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            playJourneyAnimation();
-            journeyObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.5 });
-      if (document.getElementById("journey")) journeyObserver.observe(document.getElementById("journey"));
-
-      // 2. Script Animasi Muncul Saat Digeser ke Bawah (Scroll Reveal)
-      const revealSections = document.querySelectorAll(".reveal-section");
-      
-      function checkReveal() {
-        const triggerBottom = window.innerHeight * 0.85;
-        revealSections.forEach(section => {
-          const sectionTop = section.getBoundingClientRect().top;
-          if (sectionTop < triggerBottom) {
-            section.classList.add("active");
-          }
-        });
-      }
-
-      window.addEventListener("scroll", checkReveal);
-      checkReveal();
-
-      // 3. Script Ganti Tema Background & Trigger Animasi Saat Menu Diklik
-      const sections = document.querySelectorAll("section");
-      
-      window.addEventListener("scroll", function() {
-        let current = "home";
-        const scrollPosition = window.scrollY + 300;
-
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop;
-          const sectionHeight = section.offsetHeight;
-          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            current = section.getAttribute("id");
-          }
-        });
-
-        if (current === "home") document.body.setAttribute("data-theme", "home");
-        else if (current === "about") document.body.setAttribute("data-theme", "about");
-        else if (current === "projects") document.body.setAttribute("data-theme", "films");
-        else if (current === "journey") document.body.setAttribute("data-theme", "journey");
-        else if (current === "bucketlist") document.body.setAttribute("data-theme", "bucketlist");
-        else if (current === "contact") document.body.setAttribute("data-theme", "contact");
-      });
-
-      // Menu Navbar: Berubah warna pas diklik & Replay animasi section terkait
-      const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
-      navLinks.forEach(link => {
-        link.addEventListener("click", function(e) {
-          navLinks.forEach(item => item.classList.remove("active"));
-          this.classList.add("active");
-
-          // Ambil tujuan target klik (misal: #about atau #journey)
-          const targetId = this.getAttribute("href");
-          if (targetId === "#about") {
-            setTimeout(playAboutAnimation, 300); // Putar ulang animasi ketik about
-          } else if (targetId === "#journey") {
-            setTimeout(playJourneyAnimation, 300); // Putar ulang animasi ketik journey
-          }
-        });
-      });
-
-      // 4. Script Animasi Klik Kursor
-      document.addEventListener("click", function(e) {
-        const circle = document.createElement("div");
-        circle.className = "click-animation";
-        circle.style.left = e.clientX + "px";
-        circle.style.top = e.clientY + "px";
-        document.body.appendChild(circle);
-
-        setTimeout(() => {
-          circle.remove();
-        }, 400);
-      });
+/* Script Animasi Klik Menu Berbeda Warna & Bentuk */
+document.querySelectorAll('.nav-trigger').forEach(trigger => {
+  trigger.addEventListener('click', function(e) {
+    document.querySelectorAll('.nav-trigger').forEach(nav => {
+      nav.classList.remove('nav-clicked-home', 'nav-clicked-about', 'nav-clicked-journey', 'nav-clicked-films', 'nav-clicked-places', 'nav-clicked-contact');
     });
-  </script>
-</body>
 
+    const target = this.getAttribute('data-target');
+    if (target === 'home') this.classList.add('nav-clicked-home');
+    else if (target === 'about') this.classList.add('nav-clicked-about');
+    else if (target === 'journey') this.classList.add('nav-clicked-journey');
+    else if (target === 'films') this.classList.add('nav-clicked-films');
+    else if (target === 'places') this.classList.add('nav-clicked-places');
+    else if (target === 'contact') this.classList.add('nav-clicked-contact');
+
+    setTimeout(() => {
+      this.classList.remove('nav-clicked-home', 'nav-clicked-about', 'nav-clicked-journey', 'nav-clicked-films', 'nav-clicked-places', 'nav-clicked-contact');
+    }, 450);
+
+    const targetId = this.getAttribute('href');
+    if (targetId && targetId.startsWith('#')) {
+      const targetSection = document.querySelector(targetId);
+      const targetColor = this.getAttribute('data-color');
+      if (targetSection && targetColor) {
+        targetSection.style.backgroundColor = targetColor;
+      }
+    }
+  });
+});
+
+const sections = document.querySelectorAll('.section');
+window.addEventListener('scroll', () => {
+  let scrollPos = window.scrollY + window.innerHeight / 3;
+  sections.forEach(section => {
+    let top = section.offsetTop;
+    let height = section.offsetHeight;
+    if (scrollPos >= top && scrollPos < top + height) {
+      let bg = section.getAttribute('data-bg');
+      if(bg) {
+        section.style.backgroundColor = bg;
+      }
+    }
+  });
+});
+
+const emojisList = ['✨', '💖', '🌿', '🌸', '🎬', '🏔️', '☁️', '⭐', '🦋', '💫'];
+const emojiContainer = document.getElementById('floatingEmojisContainer');
+
+function createFloatingEmoji() {
+  if (!emojiContainer) return;
+  const span = document.createElement('span');
+  span.className = 'floating-emoji';
+  span.textContent = emojisList[Math.floor(Math.random() * emojisList.length)];
+  span.style.left = Math.random() * 95 + 'vw';
+  span.style.animationDuration = (Math.random() * 3 + 5) + 's';
+  span.style.fontSize = (Math.random() * 1 + 1) + 'rem';
+  emojiContainer.appendChild(span);
+
+  setTimeout(() => {
+    span.remove();
+  }, 8000);
+}
+
+setInterval(createFloatingEmoji, 600);
+</script>
+<script src="script.js"></script>
+</body>
 </html>
